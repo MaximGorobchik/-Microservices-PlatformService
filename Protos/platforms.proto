@@ -1,0 +1,21 @@
+syntax = "proto3"; // вказує на використання синтаксису protobuf версії 3
+
+option csharp_namespace = "PlatformService"; //вказує простір імен для генерації коду на C#
+
+service GrpcPlatform {
+    rpc GetAllPlatforms (GetAllRequest) returns (PlatformResponse);
+}
+
+message GetAllRequest {}
+
+message GrpcPlatformModel{
+    int32 platformId = 1;
+    string name = 2;
+    string publisher = 3;
+}
+
+//Визначає повідомлення PlatformResponse з повторюваним полем platform, яке містить екземпляри GrpcPlatformModel
+//Ключове слово repeated вказує на те, що це поле може містити багато значень
+message PlatformResponse {
+    repeated GrpcPlatformModel platform = 1;
+}
